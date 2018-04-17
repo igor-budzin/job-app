@@ -1,9 +1,7 @@
 {
-'presets': [
-	["latest"],
-    ['es2015', { 'modules': false }],
-    'react',
-    'stage-0',
-    'react-hmre'
-]
+  "presets": [
+    "env",
+    "react",
+    "stage-2"
+  ]
 }

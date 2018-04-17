@@ -1,19 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputPath = path.resolve(__dirname, './dist');
 
-const extractSCSS = new MiniCssExtractPlugin({
-  filename: 'assets/css/[name].[contenthash].css',
-  allChunks: true
-});
-
-const webpackConfig = {
-	mode: 'development',
+module.exports = {
 	entry: {
 		app: [
+			'react-hot-loader/patch',
 			path.resolve(__dirname, './src/index.js')
 		]
 	},
@@ -24,43 +17,30 @@ const webpackConfig = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: 'babel-loader'
-			},
-			{
-				test: /\.jsx$/,
-				exclude: /node_modules/,
-				use: 'babel-loader'
+				use: ['babel-loader']
 			},
 			{
 				test: /\.scss$/,
-				exclude: /node_modules/,
-				use: extractSCSS.extract({
-				    fallback: 'style-loader',
-				    //resolve-url-loader may be chained before sass-loader if necessary
-				    use: ['css-loader', 'sass-loader']
-				  })
-			},
-			{
-				test: /\.css$/,
-				exclude: /node_modules/,
 				use: [
-					'style-loader',
-					'css-loader'
+					{loader: 'style-loader'},
+					{loader: 'css-loader'},
+					{loader: 'sass-loader'}
+        		]
+			},
+			{
+				test: /\.less$/,
+				use: [
+					{loader: 'style-loader'},
+					{loader: 'css-loader'},
+					{loader: 'less-loader', options: {javascriptEnabled: true}}
 				]
-			},
-			{
-				test: /\.(gif|png|jpg|jpeg|svg)$/,
-				exclude: /node_modules/,
-				include: path.resolve(__dirname, './src/assets/'),
-				use: 'url-loader?limit=10000&name=assets/[name]-[hash].[ext]'
-			},
-			{
-				test: /\.(eot|svg|ttf|woff|woff2)$/,
-				loader: 'url-loader?name=assets/[name].[ext]'
 			}
 		]
+	},
+	resolve: {
+		extensions: ['*', '.js', '.jsx', 'scss', 'less']
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -69,8 +49,7 @@ const webpackConfig = {
 			path: outputPath
 		}),
 		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-		extractSCSS
+		new webpack.HotModuleReplacementPlugin()
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, './dist'),
@@ -79,6 +58,4 @@ const webpackConfig = {
 		inline: true,
 		hot: true
 	}
-}
-
-module.exports = webpackConfig;
+};
