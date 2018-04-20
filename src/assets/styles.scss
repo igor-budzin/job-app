@@ -62,9 +62,8 @@ body {
 	padding: 0;
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 14px;
-	color: #333;
-	background-color: #f7f7f7;
-	color: #757575;
+	background-color: #fff;
+	color: #3c3c3c;
 }
 .app {
 	background-color: #fff;
@@ -72,20 +71,42 @@ body {
 	margin: 20px auto;
 	padding: 20px;
 	background-color: #fff;
+	box-shadow: 0 1px 10px 1px rgba(0,0,0,0.15);
+}
+a:hover {
+	border-bottom: 1px dashed #ff7575;
 }
 
 .search {
 	margin-bottom: 20px;
+	.search-input {
+		.ant-input:hover {
+		    border-color: #ff7575;
+		}
+		.ant-input:focus {
+			border-color: #ff7575;
+			box-shadow: 0 0 0 2px lighten(#ff7575, 20%);
+		}
+		.ant-btn-primary {
+			font-weight: bold;
+			background-color: #ff7575;
+    		border-color: #ff7575;
+		}
+	}
 }
 
 .post {
 	padding: 10px 0;
 	border-bottom: 1px solid #ececec;
+	&:last-child { border-bottom: 0 }
 	.title {
-		font-weight: bold;
-		font-size: 16px;
-		color: #757575;
 		margin-bottom: 10px;
+		a {
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 16px;
+			color: #ff7575;
+		}
 	}
 	.more {
 		margin-bottom: 10px;
@@ -98,9 +119,29 @@ body {
 	}
 	.description {
 		margin-bottom: 10px;
-		line-height: 16px;
+		line-height: 17px;
 	}
 	.time {
 		color: #b3b3b3;
+	}
+}
+
+.pagination {
+	text-align: center;
+	.ant-pagination-item {
+		display: inline-block;
+		&:hover {
+			border-color: #ff7575;
+		}
+		&:hover a {
+			color: #ff7575;
+			border: 0;
+		}
+	}
+	.ant-pagination-item-active {
+		border-color: #ff7575;
+		a {
+			color: #ff7575;
+		}
 	}
 }
