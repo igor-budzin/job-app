@@ -7,18 +7,30 @@ import SearchContainer from './search/SearchContainer';
 import PostContainer from './post/PostContainer';
 
 export default class App extends Component {
+	constructor(props) {
+	super(props);
+		this.state = {
+			jobs: []
+		};
+	}
+
+	_handlerJob = (jobs) => {
+		this.setState({
+			jobs: jobs
+		});
+	}
 
     render() {
         return (
             <div className="app">
 				<Row>
 					<Col span={24}>
-						<SearchContainer />
+						<SearchContainer handlerJob={this._handlerJob} />
 					</Col>
 				</Row>
 				<Row gutter={24}>
 					<Col span={15}>
-						<PostContainer />
+						<PostContainer jobs={this.state.jobs} />
  						<Pagination className="pagination" defaultCurrent={6} total={100} />
 					</Col>
 					<Col span={9}></Col>

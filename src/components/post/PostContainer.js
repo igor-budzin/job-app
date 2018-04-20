@@ -6,10 +6,11 @@ export default class PostContainer extends Component {
     render() {
         return (
 			<div className="posts">
-				<Post />
-				<Post />
-				<Post />
-				<Post />
+				{
+					this.props.jobs.map((item) => {
+						return <Post job={item} key={item.id} />
+					})
+				}
 			</div>
         );
     }

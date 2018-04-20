@@ -93,6 +93,13 @@ a:hover {
     		border-color: #ff7575;
 		}
 	}
+	.ant-input-search:hover .ant-input {
+		border-color: #ff7575;
+	}
+	.ant-select-open .ant-select-selection,
+	.ant-select-focused .ant-select-selection {
+		color: #ff7575;
+	}
 }
 
 .post {
@@ -112,7 +119,7 @@ a:hover {
 		margin-bottom: 10px;
 	}
 	.more > span {
-		margin-right: 10px;
+		padding-right: 10px;
 	}
 	.money {
 		font-weight: bold;

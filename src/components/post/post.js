@@ -5,10 +5,10 @@ export default class Post extends Component {
     render() {
         return (
 			<div className="post">
-				<div className="title"><a href="">Гід-екскурсовод для пивної екскурсії</a></div>
+				<div className="title"><a href="">{this.props.job.name}</a></div>
 				<div className="more">
-					<span className="money">12 000 грн.</span>
-					<span className="company">LvivBuddy</span>
+					<span className="money">{this.props.job.salary ? this.props.job.salary.from : ''} грн.</span>
+					<span className="company">{this.props.job.employer.name}</span>
 					<span className="city">Львів</span>
 				</div>
 				<div className="description">
