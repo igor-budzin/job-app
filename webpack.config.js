@@ -49,7 +49,8 @@ module.exports = {
 			path: outputPath
 		}),
 		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, './dist'),

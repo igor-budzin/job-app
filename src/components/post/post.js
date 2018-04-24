@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment-with-locales-es6';
 
 export default class Post extends Component {
 
@@ -12,12 +13,13 @@ export default class Post extends Component {
 					<span className="city">Львів</span>
 				</div>
 				<div className="description">
-					Ти любиш пиво? розумієшся в його видах зокрема кравтових?
-					Можеш розказати щось про історію пивоваріння у Львові англійською чи німецькою (інша мова як +)і
-					 не маєш проблем зі спілкування цими мовами? Тоді це ідеальна робота для тебе! Надсилай резюме (англійською)
-					і можливо регулярне цікаве спілкув...
+					{this.props.job.snippet.requirement}
 				</div>
-				<div className="time">3 дні тому</div>
+				<div className="time">
+					{
+						moment(this.props.job.published_at).locale('uk').startOf('day').fromNow()
+					}
+				</div>
 			</div>
         );
     }
