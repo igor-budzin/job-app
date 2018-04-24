@@ -30,8 +30,13 @@ export default class App extends Component {
 				</Row>
 				<Row gutter={24}>
 					<Col span={15}>
-						<PostContainer jobs={this.state.jobs} />
- 						<Pagination className="pagination" defaultCurrent={6} total={100} />
+						{
+							this.state.jobs.length ?
+							<PostContainer jobs={this.state.jobs} /> :
+							<div className="empty-posts">Почніть набирати назву вакансії<br /> в полі вище</div>
+						}
+
+ 						<Pagination className="pagination" defaultCurrent={1} total={100} />
 					</Col>
 					<Col span={9}></Col>
 				</Row>

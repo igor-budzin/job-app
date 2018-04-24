@@ -3,24 +3,29 @@ import axios from 'axios';
 import {Row, Col, Input, Form, Select} from 'antd';
 import 'antd/lib/input/style';
 
-const Search = Input.Search;
 const Option = Select.Option;
 
 export default class SearchContainer extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			value: ''
+			value: '',
+			area: null,
+			order: 'expiration_date_desc'
 		};
-		this.selectBefore = (
-			<Select defaultValue="Львів" style={{ width: 110 }}>
-				<Option value="Львів">Львів</Option>
-				<Option value="Київ">Київ</Option>
-				<Option value="Харків">Харків</Option>
-				<Option value="Одеса">Одеса</Option>
-				<Option value="Тернопіль">Тернопіль</Option>
-				<Option value="Ужгород">Ужгород</Option>
-				<Option value="Дніпро">Дніпро</Option>
+
+		this.selectAfter = (
+			<Select defaultValue="Місто" onChange={this.handleChange} style={{ width: 110 }}>
+				<Option value="0">Будь яке</Option>
+				<Option value="125">Львів</Option>
+				<Option value="115">Київ</Option>
+				<Option value="135">Харків</Option>
+				<Option value="127">Одеса</Option>
+				<Option value="133">Тернопіль</Option>
+				<Option value="134">Ужгород</Option>
+				<Option value="117">Дніпро</Option>
+				<Option value="116">Вінниця</Option>
 			</Select>
 		);
 	}
@@ -29,7 +34,9 @@ export default class SearchContainer extends Component {
 		event.preventDefault();
 		axios.get('https://api.hh.ru/vacancies', {
 			params: {
-				text: this.state.value
+				text: this.state.value,
+				area: this.state.area,
+				vacancy_search_order: this.state.order
 			}
 		})
 		.then(function (response) {
@@ -41,19 +48,35 @@ export default class SearchContainer extends Component {
 		});
 	}
 
+	handleChange = (value) => {
+		this.setState({area: value != 0 ? value : null});
+	}
+
     render() {
         return (
             <div className="search">
-				<Form onSubmit={this.handleSubmit}>
-					<Search
-						className="search-input"
-						onChange={(event) => this.setState({value: event.target.value})}
-						addonBefore={this.selectBefore}
-						placeholder="input search text"
-						enterButton="Search"
-						size="large"
-					/>
-				</Form>
+				<Row gutter={24}>
+					<Col span={15}>
+						<Form onSubmit={this.handleSubmit}>
+							<Input
+								className="search-input"
+								onChange={(event) => this.setState({value: event.target.value})}
+								addonAfter={this.selectAfter}
+								placeholder="Пошук ваканісії . . ."
+								size="large"
+							/>
+
+						</Form>
+					</Col>
+					<Col span={9}>
+						<Select defaultValue="Сортування" style={{ width: '100%' }} size="large">
+							<Option value="expiration_date_asc">По даті (зростання)</Option>
+							<Option value="expiration_date_desc">По даті (Спадання)</Option>
+							<Option value="name_asc">По назві (abc)</Option>
+							<Option value="name_desc">По назві (desc)</Option>
+						</Select>
+					</Col>
+				</Row>
             </div>
         );
     }
