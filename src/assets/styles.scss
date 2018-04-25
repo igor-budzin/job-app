@@ -83,7 +83,7 @@ a:hover {
 .empty-posts {
 	text-align: center;
 	font-size: 24px;
-	margin: 25px 0 40px 0;
+	margin: 100px 0 140px 0;
 	line-height: 32px;
 }
 
@@ -145,6 +145,7 @@ a:hover {
 
 .pagination {
 	text-align: center;
+	margin: 25px 0 10px 0;
 	.ant-pagination-item {
 		display: inline-block;
 		&:hover {

@@ -12,7 +12,8 @@ export default class SearchContainer extends Component {
 		this.state = {
 			value: '',
 			area: null,
-			order: 'expiration_date_desc'
+			order: 'expiration_date_desc',
+			page: 0
 		};
 
 		this.selectAfter = (
@@ -36,11 +37,13 @@ export default class SearchContainer extends Component {
 			params: {
 				text: this.state.value,
 				area: this.state.area,
-				vacancy_search_order: this.state.order
+				vacancy_search_order: this.state.order,
+				per_page: 10,
+				page: this.state.page
 			}
 		})
 		.then(function (response) {
-			this.props.handlerJob(response.data.items)
+			this.props.handlerJob(response.data)
 			// console.log(response);
 		}.bind(this))
 		.catch(function (error) {
@@ -50,6 +53,31 @@ export default class SearchContainer extends Component {
 
 	handleChange = (value) => {
 		this.setState({area: value != 0 ? value : null});
+	}
+
+	componentWillReceiveProps = (nextProps) => {
+		if(this.props.page !== nextProps.page) {
+			this.setState({
+				page: nextProps.page
+			}, () => {
+				axios.get('https://api.hh.ru/vacancies', {
+					params: {
+						text: this.state.value,
+						area: this.state.area,
+						vacancy_search_order: this.state.order,
+						per_page: 10,
+						page: this.state.page
+					}
+				})
+				.then(function (response) {
+					this.props.handlerJob(response.data)
+					// console.log(response);
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+				});
+			});
+		}
 	}
 
     render() {
