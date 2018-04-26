@@ -5,6 +5,7 @@ import 'antd/lib/col/style';
 import 'antd/lib/pagination/style';
 import SearchContainer from './search/SearchContainer';
 import PostContainer from './post/PostContainer';
+import {scrollToTop} from '../lib/custom'
 
 export default class App extends Component {
 	constructor(props) {
@@ -13,16 +14,15 @@ export default class App extends Component {
 			jobs: [],
 			availability: false,
 			page: null,
-			totalPages: 0
+			totalItems: 0
 		};
 	}
 
 	_handlerJob = (data) => {
-		console.log(data.pages);
 		this.setState({
 			jobs: data.items,
 			availability: !!data,
-			totalPages: !!data ? data.found : 0
+			totalItems: !!data ? (data.found >= 2000 ? 1999 : data.found) : 0 // обмеження api
 		});
 	}
 
@@ -43,6 +43,8 @@ export default class App extends Component {
 	onChangePage = (page) => {
 		this.setState({
 			currentPage: page
+		}, () => {
+			scrollToTop(200);
 		});
 	}
 
@@ -61,7 +63,7 @@ export default class App extends Component {
 							this.state.jobs.length > 0 ?
 							<Pagination
 								className="pagination"
-								total={this.state.totalPages}
+								total={this.state.totalItems - 10}
 								onChange={this.onChangePage}
 								hideOnSinglePage={true}
 							/> : ''
