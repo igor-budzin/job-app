@@ -2,13 +2,19 @@ import React, {Component} from 'react';
 import moment from 'moment-with-locales-es6';
 
 export default class Post extends Component {
+	parseMoney = () => {
+		if(this.props.job.salary !== null && this.props.job.salary.from !== null) {
+			const money = +this.props.job.salary.from;
+			return money.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + ' грн.';
+		}
+	}
 
     render() {
         return (
 			<div className="post">
 				<div className="title"><a href="">{this.props.job.name}</a></div>
 				<div className="more">
-					<span className="money">{this.props.job.salary ? this.props.job.salary.from : ''} грн.</span>
+					<span className="money">{this.parseMoney()}</span>
 					<span className="company">{this.props.job.employer.name}</span>
 					<span className="city">Львів</span>
 				</div>
