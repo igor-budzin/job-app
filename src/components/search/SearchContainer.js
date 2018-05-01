@@ -12,7 +12,7 @@ export default class SearchContainer extends Component {
 		this.state = {
 			text: '',
 			area: null,
-			order: 'expiration_date_desc',
+			order: 'publication_time',
 			page: 0
 		};
 
@@ -35,9 +35,9 @@ export default class SearchContainer extends Component {
 		event.preventDefault();
 		axios.get('https://api.hh.ru/vacancies', {
 			params: {
-				text: this.state.value,
+				text: this.state.text,
 				area: this.state.area,
-				employer_active_vacancies_order: this.state.order,
+				order_by: this.state.order,
 				per_page: 10,
 				page: this.state.page
 			}
@@ -60,9 +60,9 @@ export default class SearchContainer extends Component {
 			if(this.state.text.length !== 0) {
 				axios.get('https://api.hh.ru/vacancies', {
 					params: {
-						text: this.state.value,
+						text: this.state.text,
 						area: this.state.area,
-						employer_active_vacancies_order: this.state.order,
+						order_by: this.state.order,
 						per_page: 10,
 						page: this.state.page
 					}
@@ -85,9 +85,9 @@ export default class SearchContainer extends Component {
 			}, () => {
 				axios.get('https://api.hh.ru/vacancies', {
 					params: {
-						text: this.state.value,
+						text: this.state.text,
 						area: this.state.area,
-						employer_active_vacancies_order: this.state.order,
+						order_by: this.state.order,
 						per_page: 10,
 						page: this.state.page
 					}
@@ -121,10 +121,10 @@ export default class SearchContainer extends Component {
 					</Col>
 					<Col span={9}>
 						<Select defaultValue="Сортування" onChange={this.handleSortChange} style={{ width: '100%' }} size="large">
-							<Option value="expiration_date_asc">По даті (зростання)</Option>
-							<Option value="expiration_date_desc">По даті (спадання)</Option>
-							<Option value="name_asc">По назві (abc)</Option>
-							<Option value="name_desc">По назві (desc)</Option>
+							<Option value="publication_time">По даті</Option>
+							<Option value="relevance">По відповідності</Option>
+							<Option value="salary_asc">По зарплаті (abc)</Option>
+							<Option value="salary_desc">По зарплаті (desc)</Option>
 						</Select>
 					</Col>
 				</Row>
