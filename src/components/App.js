@@ -5,7 +5,7 @@ import 'antd/lib/col/style';
 import 'antd/lib/pagination/style';
 import SearchContainer from './search/SearchContainer';
 import PostContainer from './post/PostContainer';
-import {scrollToTop} from '../lib/custom'
+import {scrollToTop} from '../lib/animation'
 
 export default class App extends Component {
 	constructor(props) {

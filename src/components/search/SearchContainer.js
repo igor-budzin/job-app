@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import {Row, Col, Input, Form, Select} from 'antd';
+import {getVacancies} from '../../lib/request';
 import 'antd/lib/input/style';
 
 const Option = Select.Option;
@@ -33,15 +34,7 @@ export default class SearchContainer extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		axios.get('https://api.hh.ru/vacancies', {
-			params: {
-				text: this.state.text,
-				area: this.state.area,
-				order_by: this.state.order,
-				per_page: 10,
-				page: this.state.page
-			}
-		})
+		getVacancies(this.state.text, this.state.area, this.state.order, this.state.page)
 		.then(function (response) {
 			this.props.handlerJob(response.data)
 			// console.log(response);
@@ -58,15 +51,7 @@ export default class SearchContainer extends Component {
 	handleSortChange = (value) => {
 		this.setState({order: value}, () => {
 			if(this.state.text.length !== 0) {
-				axios.get('https://api.hh.ru/vacancies', {
-					params: {
-						text: this.state.text,
-						area: this.state.area,
-						order_by: this.state.order,
-						per_page: 10,
-						page: this.state.page
-					}
-				})
+				getVacancies(this.state.text, this.state.area, this.state.order, this.state.page)
 				.then(function (response) {
 					this.props.handlerJob(response.data)
 					// console.log(response);
@@ -83,15 +68,7 @@ export default class SearchContainer extends Component {
 			this.setState({
 				page: nextProps.page
 			}, () => {
-				axios.get('https://api.hh.ru/vacancies', {
-					params: {
-						text: this.state.text,
-						area: this.state.area,
-						order_by: this.state.order,
-						per_page: 10,
-						page: this.state.page
-					}
-				})
+				getVacancies(this.state.text, this.state.area, this.state.order, this.state.page)
 				.then(function (response) {
 					this.props.handlerJob(response.data)
 					// console.log(response);
