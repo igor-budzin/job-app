@@ -5,6 +5,7 @@ import 'antd/lib/col/style';
 import 'antd/lib/pagination/style';
 import SearchContainer from './search/SearchContainer';
 import PostContainer from './post/PostContainer';
+import FilterContainer from './filter/FilterContainer';
 import {scrollToTop} from '../lib/animation'
 
 export default class App extends Component {
@@ -69,7 +70,9 @@ export default class App extends Component {
 							/> : ''
 						}
 					</Col>
-					<Col span={9}></Col>
+					<Col span={9}>
+						<FilterContainer />
+					</Col>
 				</Row>
             </div>
         );

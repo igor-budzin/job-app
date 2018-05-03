@@ -1,5 +1,4 @@
-import React,{Component} from 'react';
-import axios from 'axios';
+import React, {Component} from 'react';
 import {Row, Col, Input, Form, Select} from 'antd';
 import {getVacancies} from '../../lib/request';
 import 'antd/lib/input/style';
