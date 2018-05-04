@@ -163,3 +163,18 @@ a:hover {
 		}
 	}
 }
+
+.filters {
+	padding: 0 5px;
+	h6 {
+		margin-bottom: 10px;
+		font-weight: bold;
+		color: #3c3c3c;
+	}
+	.filter {
+		margin-bottom: 20px;
+		.body {
+			padding: 0 5px;
+		}
+	}
+}
