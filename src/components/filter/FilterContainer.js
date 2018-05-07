@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Row, Col, Checkbox, Input} from 'antd';
+import {Row, Col, Checkbox, Slider} from 'antd';
 import 'antd/lib/checkbox/style';
+import 'antd/lib/slider/style';
 
 export default class FilterContainer extends Component {
 	constructor(props) {
@@ -27,13 +28,9 @@ export default class FilterContainer extends Component {
 				</div>
 
 				<div className="filter">
-					<h6>Заробітня плата</h6>
+					<h6>Заробітня плата від:</h6>
 					<div className="body">
-						<Input.Group compact>
-							<Input style={{ width: 125, textAlign: 'center' }} placeholder="Мінімальна" />
-							<Input style={{ width: 30, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} placeholder="-" disabled />
-							<Input style={{ width: 125, textAlign: 'center', borderLeft: 0 }} placeholder="Максимальна" />
-						</Input.Group>
+						<Slider defaultValue={30} step={1000} min={0} max={50000} disabled={false} />
 					</div>
 				</div>
 			</div>

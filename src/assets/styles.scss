@@ -138,7 +138,16 @@ a:hover {
 		margin-bottom: 10px;
 		line-height: 17px;
 	}
+	.save {
+		float: left;
+		display: inline-block;
+		float: right;
+		i:before {
+			font-size: 20px;
+		}
+	}
 	.time {
+		display: inline-block;
 		color: #b3b3b3;
 	}
 }
